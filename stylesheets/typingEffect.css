@@ -1,0 +1,31 @@
+#typingEffectWrapperWrapper {
+    display: block;
+    padding: 4vh 4vw;
+    background-color: #7d9ebf;
+}
+
+#typingEffectWrapper {
+    /*margin-right: 20vw;*/
+    /*margin-left: 20vw;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
+}
+
+#typingEffect, #cursor {
+    background-color: #7d9ebf;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding-right: 1vh;
+    padding-left: 1vh;
+    padding-top: 1vh;
+    color: #111;
+    font-size: x-large;
+    margin: 0;
+}
+
+.blinkingAnimation {
+    animation: blink 1060ms infinite;
+}

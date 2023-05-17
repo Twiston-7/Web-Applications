@@ -1,0 +1,49 @@
+nav {
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 8vh;
+    font-size: 3vh;
+    display: flex;
+    width: 100vw;
+}
+
+nav a {
+    margin-right: 2vw;
+    margin-top: 1vh;
+    margin-left: 1vw;
+    color: #8080c0;
+    list-style-type: none;
+    text-decoration: none;
+    position: relative;
+    top: 0;
+    transition: top 0.2s linear;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+    width: 100%;
+}
+
+nav img {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 1vh;
+    margin-top: 1vh;
+}
+
+nav a:hover:not(#logo) {
+    top: -0.5vh;
+}
+
+nav a:not(:hover):not(#logo) {
+    top: 0;
+}
+
+#logo {
+    transition: none;
+    max-height: 7vh;
+    width: auto;
+}
