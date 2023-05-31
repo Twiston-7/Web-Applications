@@ -1,5 +1,6 @@
 :root {
     --background-color: #bdbaef;
+    --text-color: #000000;
 }
 
 @keyframes blink {
@@ -29,7 +30,7 @@
     justify-content: center;
     flex-direction: row;
     padding-top: 1vh;
-    color: #111;
+    color: var(--text-color);
     font-size: x-large;
     margin: 0;
 }

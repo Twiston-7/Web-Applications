@@ -6,6 +6,8 @@ body {
 
 article {
     color: #8686e0;
+    max-width: 60%;
+    width: 200%;
     margin-right: 20vw;
     margin-left: 20vw;
 }
@@ -15,5 +17,9 @@ article p {
 }
 
 article h1 {
-    font-size: max(40vw, 5vh);
+    font-size: min(40vw, 5vh);
+}
+
+article a {
+    color: white;
 }
