@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    background-color: #211441;
+    font-family: 'Inter', sans-serif
+}
+
+article {
+    color: #8686e0;
+    margin-right: 20vw;
+    margin-left: 20vw;
+}
+
+article p {
+    font-size: min(5vw, 3.5vh);
+}
+
+article h1 {
+    font-size: max(40vw, 5vh);
+}

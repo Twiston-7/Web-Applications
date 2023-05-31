@@ -1,7 +1,7 @@
 nav {
     font-family: 'Roboto', sans-serif;
     margin-bottom: 8vh;
-    font-size: 3vh;
+    font-size: min(4vh, 7vw);
     display: flex;
     width: 100vw;
 }
@@ -10,7 +10,7 @@ nav a {
     margin-right: 2vw;
     margin-top: 1vh;
     margin-left: 1vw;
-    color: #8080c0;
+    color: #6868b5;
     list-style-type: none;
     text-decoration: none;
     position: relative;
@@ -34,16 +34,16 @@ nav img {
     margin-top: 1vh;
 }
 
-nav a:hover:not(#logo) {
+nav a:hover {
     top: -0.5vh;
 }
 
-nav a:not(:hover):not(#logo) {
+nav a:not(:hover) {
     top: 0;
 }
 
 #logo {
     transition: none;
-    max-height: 7vh;
+    max-height: 9vh;
     width: auto;
 }

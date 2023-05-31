@@ -1,13 +1,10 @@
-// noinspection InfiniteLoopJS,JSIgnoredPromiseFromCall
-
 const wordsToType = ["Hello, world!", "How are you doing today?"];
 
 let blink = false;
 
-const drawText = async function(...wordsToType) {
+const drawText = async function(wordsToType) {
     const container = document.getElementById("typingEffect");
 
-    // noinspection InfiniteLoopJS
     while (true) {
         container.innerText = "​";
 
@@ -48,9 +45,9 @@ const cursor = async function() {
     }
 }
 
-const sleep = function(ms) {
+const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-drawText(...wordsToType);
+drawText(wordsToType);
 cursor();
