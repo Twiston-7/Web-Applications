@@ -47,3 +47,8 @@ nav a:not(:hover) {
     max-height: 9vh;
     width: auto;
 }
+
+#logout-button {
+    font-size: min(2vh, 3.5vw);
+    margin-left: 0vw;
+}

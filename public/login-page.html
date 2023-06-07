@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/login-styles.css">
+</head>
+<body>
+<!--load navbar-->
+<nav></nav>
+<script src="javascript/jquery-3.6.0.min.js"></script>
+<script>$(function() {$('nav').load('navbar.html');});</script>
+<article>
+    <h1>Login</h1>
+    <form>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Login" id="login-button">
+    </form>
+</article>
+<script src="javascript/login.js"></script>
+</body>
+</html>

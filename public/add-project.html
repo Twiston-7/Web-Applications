@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a project</title>
+    <link rel="stylesheet" href="stylesheets/main.css"/>
+    <link rel="stylesheet" href="stylesheets/button.css"/>
+</head>
+<body>
+<nav></nav>
+<script src="javascript/jquery-3.6.0.min.js"></script>
+<script src="javascript/add-project.js"></script> <!-- Add the link to your external JavaScript file -->
+<script>$(function() {$('nav').load('navbar.html');});</script>
+<article>
+    <h1>Add a Project</h1>
+    <form id="project-form" action="#" method="POST">
+        <label for="project-name">Project name:</label>
+        <input type="text" id="project-name" name="project-name" required>
+        <br>
+        <br>
+
+        <label for="project-language">Project language:</label> <!-- Corrected the "for" attribute value -->
+        <input type="text" id="project-language" name="project-language" required>
+        <br>
+        <br>
+
+        <label for="project-skills">Project skills:</label> <!-- Corrected the "for" attribute value -->
+        <div id="skills-container">
+            <input type="text" class="project-skills" name="project-skills" required>
+            <button type="button" class="add-skill-button">+</button>
+        </div>
+        <br>
+        <br>
+
+        <button type="submit" class="coloredButton">Add Project</button>
+    </form>
+</article>
+</body>
+</html>

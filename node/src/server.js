@@ -26,13 +26,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
-
-app.get('/projects/:projectID', function (req, res) {
-    const projectID = req.params.projectID;
-    // TODO: Find student with the given student number
-    res.send(`Project with ID ${projectID} was not found.`);
-});
-
-app.get('/contact/', function (req, res) {
-    res.status(200).send('No contact for now.');
-});

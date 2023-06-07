@@ -1,4 +1,4 @@
-// File: routers/cat-router.js
+// File: routers/project-router.js
 import express from "express";
 import statusCodes from 'http-status-codes';
 import * as projectsController from '../controllers/projects-controller.js';
@@ -7,9 +7,9 @@ import * as projectsController from '../controllers/projects-controller.js';
 const router = express.Router();
 
 // Calls go here
-router.get('/projects', projectsController.getAllProjects);
+router.get('/', projectsController.getAllProjects);
 
-router.post('/projects', projectsController.addProject);
+router.post('/', projectsController.addProject);
 
 // A default export of the router
 export default router;
