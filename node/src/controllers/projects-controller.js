@@ -9,8 +9,10 @@ const databasePath = path.join(__dirname, "../database/db/data.sqlite");
 const db = new Database(databasePath);
 
 const getAllProjectsQuery = `
-SELECT projects.id, projects.name, projects.language, GROUP_CONCAT(skills.name) AS skills
+SELECT projects.id, projects.name, GROUP_CONCAT(languages.name) AS languages, GROUP_CONCAT(skills.name) AS skills
 FROM projects
+LEFT JOIN project_languages ON projects.id = project_languages.project_id
+LEFT JOIN languages ON project_languages.language_id = languages.id
 LEFT JOIN project_skills ON projects.id = project_skills.project_id
 LEFT JOIN skills ON project_skills.skill_id = skills.id
 GROUP BY projects.id
@@ -26,7 +28,17 @@ export const addProject = async function (req, res) {
 
     db.transaction(() => {
         const insertProjectQuery = `
-        INSERT INTO projects (name, language)
+        INSERT INTO projects (name)
+        VALUES (?)
+        `;
+
+        const insertLanguageQuery = `
+        INSERT INTO languages (name)
+        VALUES (?)
+        `;
+
+        const insertProjectLanguageQuery = `
+        INSERT INTO project_languages (project_id, language_id)
         VALUES (?, ?)
         `;
 
@@ -40,18 +52,27 @@ export const addProject = async function (req, res) {
         VALUES (?, ?)
         `;
 
-        const { name, language, skills } = project;
+        const { name, languages, skills } = project;
+        debugger;
         const insertProject = db.prepare(insertProjectQuery);
+        const insertLanguage = db.prepare(insertLanguageQuery);
+        const insertProjectLanguage = db.prepare(insertProjectLanguageQuery);
         const insertSkill = db.prepare(insertSkillQuery);
         const insertProjectSkill = db.prepare(insertProjectSkillQuery);
 
-        const projectResult = insertProject.run(name, language);
+        const projectResult = insertProject.run(name);
         const projectId = projectResult.lastInsertRowid;
 
         skills.forEach((skill) => {
             const skillResult = insertSkill.run(skill);
             const skillId = skillResult.lastInsertRowid;
             insertProjectSkill.run(projectId, skillId);
+        });
+
+        languages.forEach((language) => {
+            const languageResult = insertLanguage.run(language);
+            const languageId = languageResult.lastInsertRowid;
+            insertProjectLanguage.run(projectId, languageId);
         });
     })();
 
