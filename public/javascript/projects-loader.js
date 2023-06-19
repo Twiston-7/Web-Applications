@@ -2,6 +2,7 @@ const projectTableBody = document.getElementById('tbody-projects');
 
 const loadProjects = async function(){
     try {
+        debugger;
         const response = await fetch('http://localhost:3000/projects');
         const data = await response.json();
         printProjects(data);
@@ -32,6 +33,8 @@ function printProjects(projects){
         emptyTd.colSpan = 3; // Set the colspan to match the number of columns
         emptyTr.append(emptyTd);
         projectTableBody.append(emptyTr);
+
+        tr.classList.add('blank-row');
     }
 }
 

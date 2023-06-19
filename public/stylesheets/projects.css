@@ -12,24 +12,11 @@ table td {
     flex: 1; /* Optional: Distribute remaining space equally among columns */
 }
 
-@media (max-width: 600px) {
-    th,
-    td {
-        font-size: 12px;
-    }
+.blank-row {
+    margin-bottom: 1vh;
 }
 
-@media (min-width: 601px) and (max-width: 900px) {
-    th,
-    td {
-        font-size: 16px;
-    }
+th,
+td {
+    min(5vw, 3.5vh)
 }
-
-@media (min-width: 901px) {
-    th,
-    td {
-        font-size: 20px;
-    }
-}
-

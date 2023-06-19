@@ -7,6 +7,12 @@ const databasePath = path.normalize(path.join(databaseDirectory, "data.sqlite"))
 debugger;
 const db = new Database(databasePath);
 
+const dropTablesQuery = `
+DROP TABLE IF EXISTS project_skills;
+DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS skills;
+`;
+
 const createTablesQuery = `
 CREATE TABLE IF NOT EXISTS projects (
     id INTEGER PRIMARY KEY,
@@ -28,8 +34,7 @@ CREATE TABLE IF NOT EXISTS project_skills (
 );
 `;
 
+db.exec(dropTablesQuery);
 db.exec(createTablesQuery);
 
 console.log('Project tables created successfully.');
-
-

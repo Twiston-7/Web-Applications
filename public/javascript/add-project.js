@@ -21,6 +21,10 @@ $(document).ready(function() {
             skills: []
         };
 
+        // Push the value of the initial skill input field
+        formData.skills.push($('input[name="project-skills"]').val());
+
+        // Push the values of additional skill input fields
         $('.skill-input').each(function() {
             formData.skills.push($(this).val());
         });
@@ -33,7 +37,7 @@ $(document).ready(function() {
             contentType: 'application/json',
             success: function(response) {
                 alert(response);
-                // Optionally, you can redirect to another page or perform any other action
+                window.location.href = 'http://localhost:3000/projects.html';
             },
             error: function(xhr, status, error) {
                 alert('An error occurred while adding the project.');
