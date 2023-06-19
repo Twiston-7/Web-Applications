@@ -28,32 +28,32 @@ export const addProject = async function (req, res) {
 
     db.transaction(() => {
         const insertProjectQuery = `
-        INSERT INTO projects (name)
-        VALUES (?)
-        `;
+      INSERT INTO projects (name)
+      VALUES (?)
+    `;
 
         const insertLanguageQuery = `
-        INSERT INTO languages (name)
-        VALUES (?)
-        `;
+      INSERT INTO languages (name)
+      VALUES (?)
+    `;
 
         const insertProjectLanguageQuery = `
-        INSERT INTO project_languages (project_id, language_id)
-        VALUES (?, ?)
-        `;
+      INSERT INTO project_languages (project_id, language_id)
+      VALUES (?, ?)
+    `;
 
         const insertSkillQuery = `
-        INSERT INTO skills (name)
-        VALUES (?)
-        `;
+      INSERT INTO skills (name)
+      VALUES (?)
+    `;
 
         const insertProjectSkillQuery = `
-        INSERT INTO project_skills (project_id, skill_id)
-        VALUES (?, ?)
-        `;
+      INSERT INTO project_skills (project_id, skill_id)
+      VALUES (?, ?)
+    `;
 
         const { name, languages, skills } = project;
-        debugger;
+
         const insertProject = db.prepare(insertProjectQuery);
         const insertLanguage = db.prepare(insertLanguageQuery);
         const insertProjectLanguage = db.prepare(insertProjectLanguageQuery);
@@ -79,4 +79,26 @@ export const addProject = async function (req, res) {
     res
         .status(statusCodes.CREATED)
         .send(`Project with name ${project.name} added.`);
+};
+
+export const deleteProject = async function (req, res) {
+    const projectId = req.params.id;
+
+    const deleteProjectQuery = `
+    DELETE FROM projects
+    WHERE id = ?
+  `;
+
+    const deleteProject = db.prepare(deleteProjectQuery);
+    const result = deleteProject.run(projectId);
+
+    if (result.changes === 0) {
+        res
+            .status(statusCodes.NOT_FOUND)
+            .send(`Project with ID ${projectId} not found.`);
+    } else {
+        res
+            .status(statusCodes.OK)
+            .send(`Project with ID ${projectId} deleted.`);
+    }
 };

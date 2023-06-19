@@ -1,8 +1,7 @@
-const projectTableBody = document.getElementById('tbody-projects');
+// js1.js
 
-const loadProjects = async function(){
+const loadProjects = async function() {
     try {
-        debugger;
         const response = await fetch('http://localhost:3000/projects');
         const data = await response.json();
         printProjects(data);
@@ -11,20 +10,24 @@ const loadProjects = async function(){
     }
 }
 
-function printProjects(projects){
+function printProjects(projects) {
+    const projectTableBody = document.getElementById('tbody-projects');
+    projectTableBody.innerHTML = ''; // Clear the table body before adding new rows
+
     for (const project of projects) {
         const tr = document.createElement('tr');
         const tdName = document.createElement('td');
-        const tdLanguage = document.createElement('td');
+        const tdLanguages = document.createElement('td');
         const tdSkills = document.createElement('td');
         tdName.innerText = project.name;
-        tdLanguage.innerText = project.language;
+
+        // Add a space after each comma in the languages
+        tdLanguages.innerText = project.languages.split(',').map(project => project.trim()).join(', ');
 
         // Add a space after each comma in the skills
-        const skillsWithSpaces = project.skills.split(',').map(skill => skill.trim()).join(', ');
+        tdSkills.innerText = project.skills.split(',').map(skill => skill.trim()).join(', ');
 
-        tdSkills.innerText = skillsWithSpaces;
-        tr.append(tdName, tdLanguage, tdSkills);
+        tr.append(tdName, tdLanguages, tdSkills);
         projectTableBody.append(tr);
 
         // Add an empty line

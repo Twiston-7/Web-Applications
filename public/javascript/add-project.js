@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // Add a skill input field
     $('.add-skill-button').click(function() {
-        var skillInput = $('<div><input type="text" class="skill-input" name="project-skills" required> <button type="button" class="remove-skill-button">-</button></div>');
+        let skillInput = $('<div><input type="text" class="skill-input" name="project-skills" required> <button type="button" class="remove-skill-button">-</button></div>');
         skillInput.insertAfter($(this));
     });
 
@@ -10,16 +10,34 @@ $(document).ready(function() {
         $(this).parent().remove();
     });
 
+    // Add a project input field
+    $('.add-language-button').click(function() {
+        let languageInput = $('<div><input type="text" class="language-input" name="project-language" required> <button type="button" class="remove-language-button">-</button></div>');
+        languageInput.insertAfter($(this));
+    });
+
+    // Remove a project input field
+    $(document).on('click', '.remove-language-button', function() {
+        $(this).parent().remove();
+    });
+
     // Handle form submission
     $('#project-form').submit(function(event) {
         event.preventDefault(); // Prevent default form submission
 
         // Gather form data
-        var formData = {
+        let formData = {
             name: $('#project-name').val(),
-            language: $('#project-language').val(),
+            languages: [],
             skills: []
         };
+                // Push the value of the initial language input field
+        formData.languages.push($('input[name="project-language"]').val());
+
+        // Push the values of additional language input fields
+        $('.language-input').each(function() {
+            formData.languages.push($(this).val());
+        });
 
         // Push the value of the initial skill input field
         formData.skills.push($('input[name="project-skills"]').val());

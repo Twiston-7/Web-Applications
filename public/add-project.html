@@ -19,12 +19,15 @@
         <br>
         <br>
 
-        <label for="project-language">Project language:</label> <!-- Corrected the "for" attribute value -->
-        <input type="text" id="project-language" name="project-language" required>
+        <label for="project-languages">Project language:</label>
+        <div id="projects-container">
+            <input type="text" id="project-language" name="project-language" required>
+            <button type="button" class="add-language-button">+</button>
+        </div>
         <br>
         <br>
 
-        <label for="project-skills">Project skills:</label> <!-- Corrected the "for" attribute value -->
+        <label for="project-skills">Project skills:</label>
         <div id="skills-container">
             <input type="text" class="project-skills" name="project-skills" required>
             <button type="button" class="add-skill-button">+</button>

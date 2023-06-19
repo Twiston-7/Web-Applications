@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remove a project</title>
+    <link rel="stylesheet" href="stylesheets/main.css"/>
+    <link rel="stylesheet" href="stylesheets/button.css"/>
+    <script defer src="javascript/delete-project.js"></script>
+</head>
+<body>
+<nav></nav>
+<script src="javascript/jquery-3.6.0.min.js"></script>
+<script>$(function() {$('nav').load('navbar.html');});</script>
+<article>
+    <h1>Remove a Project</h1>
+    <form id="project-form" action="#" method="POST">
+        <label for="project-select"></label><select id="project-select" name="project"></select>
+        <button type="submit" class="coloredButton">Remove</button>
+    </form>
+</article>
+</body>
+</html>
