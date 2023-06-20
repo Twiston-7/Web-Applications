@@ -9,10 +9,10 @@ const db = new Database(databasePath);
 
 const dropTablesQuery = `
 DROP TABLE IF EXISTS project_skills;
+DROP TABLE IF EXISTS project_languages;
 DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS languages;
 DROP TABLE IF EXISTS skills;
-DROP TABLE IF EXISTS project_languages;
 `;
 
 const createTablesQuery = `
@@ -52,5 +52,3 @@ db.exec(dropTablesQuery);
 db.exec(createTablesQuery);
 
 console.log('Project tables created successfully.');
-
-export default db;
