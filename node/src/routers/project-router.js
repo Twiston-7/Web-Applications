@@ -2,6 +2,7 @@
 import express from "express";
 import statusCodes from 'http-status-codes';
 import * as projectsController from '../controllers/projects-controller.js';
+import {updateProject} from "../controllers/projects-controller.js";
 
 // Create a new router using express
 const router = express.Router();
@@ -12,6 +13,8 @@ router.get('/', projectsController.getAllProjects);
 router.post('/', projectsController.addProject);
 
 router.delete('/:id', projectsController.deleteProject)
+
+router.put('/:id', projectsController.updateProject);
 
 // A default export of the router
 export default router;
