@@ -7,6 +7,9 @@ const databasePath = path.normalize(path.join(databaseDirectory, "data.sqlite"))
 
 const db = new Database(databasePath);
 
+// DO NOT RUN UNLESS YOU KNOW WHAT YOU ARE DOING
+// This file drops all tables, then recreates them.
+
 const dropTablesQuery = `
 DROP TABLE IF EXISTS project_skills;
 DROP TABLE IF EXISTS project_languages;

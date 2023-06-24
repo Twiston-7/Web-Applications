@@ -1,15 +1,15 @@
-// js1.js
-
+// Function to load projects from the server
 const loadProjects = async function() {
     try {
-        const response = await fetch('http://localhost:3000/projects');
-        const data = await response.json();
-        printProjects(data);
+        const response = await fetch('http://localhost:3000/projects'); // Make a GET request to retrieve projects
+        const data = await response.json(); // Parse the response data as JSON
+        printProjects(data); // Call the printProjects function to display the projects
     } catch (error) {
-        console.error(error);
+        console.error(error); // Log any errors that occur
     }
 }
 
+// Function to print projects in the table
 function printProjects(projects) {
     const projectTableBody = document.getElementById('tbody-projects');
     projectTableBody.innerHTML = ''; // Clear the table body before adding new rows
@@ -41,4 +41,4 @@ function printProjects(projects) {
     }
 }
 
-loadProjects();
+loadProjects(); // Call the loadProjects function to load and display projects
