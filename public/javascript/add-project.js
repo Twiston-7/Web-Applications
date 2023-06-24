@@ -10,13 +10,13 @@ $(document).ready(function() {
         $(this).parent().remove();
     });
 
-    // Add a project input field
+    // Add a language input field
     $('.add-language-button').click(function() {
         let languageInput = $('<div><input type="text" class="language-input" name="project-language" required> <button type="button" class="remove-language-button">-</button></div>');
         languageInput.insertAfter($(this));
     });
 
-    // Remove a project input field
+    // Remove a language input field
     $(document).on('click', '.remove-language-button', function() {
         $(this).parent().remove();
     });
@@ -31,20 +31,33 @@ $(document).ready(function() {
             languages: [],
             skills: []
         };
-                // Push the value of the initial language input field
-        formData.languages.push($('input[name="project-language"]').val());
+
+        // Push the value of the initial language input field
+        let initialLanguage = $('input[name="project-language"]').val();
+        if (initialLanguage.trim() !== '') {
+            formData.languages.push(initialLanguage);
+        }
 
         // Push the values of additional language input fields
         $('.language-input').each(function() {
-            formData.languages.push($(this).val());
+            let language = $(this).val().trim();
+            if (language !== '') {
+                formData.languages.push(language);
+            }
         });
 
         // Push the value of the initial skill input field
-        formData.skills.push($('input[name="project-skills"]').val());
+        let initialSkill = $('input[name="project-skills"]').val();
+        if (initialSkill.trim() !== '') {
+            formData.skills.push(initialSkill);
+        }
 
         // Push the values of additional skill input fields
         $('.skill-input').each(function() {
-            formData.skills.push($(this).val());
+            let skill = $(this).val().trim();
+            if (skill !== '') {
+                formData.skills.push(skill);
+            }
         });
 
         // Make AJAX request to the server
@@ -58,7 +71,7 @@ $(document).ready(function() {
                 window.location.href = 'http://localhost:3000/projects.html';
             },
             error: function(xhr, status, error) {
-                alert('An error occurred while adding the project.');
+                alert('An error occurred while adding the project. Please try again.');
                 console.error(error);
             }
         });
