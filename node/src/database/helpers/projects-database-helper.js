@@ -31,9 +31,9 @@ export const addProject = (project) => {
         db.transaction(() => {
             // Insert the project into the 'projects' table
             const insertProjectQuery = `
-        INSERT INTO project (name, languages, skills, programmer_id)
-        VALUES (?, ?, ?, ?)
-      `;
+            INSERT INTO project (name, languages, skills, programmer_id)
+            VALUES (?, ?, ?, ?)
+            `;
 
             db.prepare(insertProjectQuery).run(
                 project.name,
@@ -61,8 +61,7 @@ export const deleteProject = (projectId) => {
         WHERE projectID = ?
     `;
 
-    const deleteProject = db.prepare(deleteProjectQuery);
-    const returnValue = deleteProject.run(projectId);
+    const returnValue = db.prepare(deleteProjectQuery).run(projectId);
     db.close();
     return returnValue;
 }
@@ -72,7 +71,7 @@ export const updateProject = (projectId, updatedProject) => {
     const db = new Database(databasePath);
 
     // Construct the UPDATE query dynamically based on the fields present in the updated project
-    let updateQuery = 'UPDATE projects SET ';
+    let updateQuery = 'UPDATE project SET ';
     let params = [];
 
     if (updatedProject.programmerID) {
@@ -87,12 +86,12 @@ export const updateProject = (projectId, updatedProject) => {
 
     if (updatedProject.skills) {
         updateQuery += 'skills = ?, ';
-        params.push(updatedProject.skills);
+        params.push(updatedProject.skills.join(", "));
     }
 
     if (updatedProject.languages) {
         updateQuery += 'languages = ?, ';
-        params.push(updatedProject.languages);
+        params.push(updatedProject.languages.join(", "));
     }
 
     // Remove the trailing comma and space from the query string

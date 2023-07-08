@@ -1,9 +1,12 @@
-import statusCodes, { StatusCodes } from "http-status-codes"; // Importing the 'http-status-codes' library
+import statusCodes from "http-status-codes"; // Importing the 'http-status-codes' library
 import * as db from "../database/helpers/projects-database-helper.js"
 
 // Function to get all projects
 export const getAllProjects = async function (req, res) {
     res.json(db.getProjects());
+    res
+        .status
+        .send(statusCodes.OK);
 };
 
 // Function to add a project
@@ -22,27 +25,27 @@ export const addProject = async function (req, res) {
         if (!project.name) {
             // Return an error response if the project name is empty
             res
-                .status(StatusCodes.BAD_REQUEST)
+                .status(statusCodes.BAD_REQUEST)
                 .send("Empty project name. Please provide project name.");
             return;
         }
         if (!project.languages || project.languages.length === 0) {
             // Return an error response if no languages are provided
             res
-                .status(StatusCodes.BAD_REQUEST)
+                .status(statusCodes.BAD_REQUEST)
                 .send("Empty languages. Please provide at least one language.");
             return;
         }
         if (!project.skills || project.skills.length === 0) {
             // Return an error response if no skills are provided
             res
-                .status(StatusCodes.BAD_REQUEST)
+                .status(statusCodes.BAD_REQUEST)
                 .send("Empty skills. Please provide at least one skill.");
             return;
         }
         if (!project.programmerID) {
             res
-                .status(StatusCodes.BAD_REQUEST)
+                .status(statusCodes.BAD_REQUEST)
                 .send("Empty programmer ID. Please provide an author id. ");
             return;
         }
