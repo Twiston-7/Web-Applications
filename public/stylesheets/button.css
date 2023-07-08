@@ -25,3 +25,15 @@
     color: #211441;
     text-decoration: none;
 }
+
+@media (orientation: portrait) {
+    #button-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .coloredButton {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}

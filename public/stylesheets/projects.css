@@ -1,5 +1,6 @@
 table {
-    width: 100%; /* Optional: Set the table width */
+    width: 100%;
+    font-size: max(1.5vw, 2.5vh);
 }
 
 table tr {
@@ -9,14 +10,38 @@ table tr {
 
 table th,
 table td {
-    flex: 1; /* Optional: Distribute remaining space equally among columns */
+    flex: 1;
+}
+
+th,
+td {
+    width: 5vw;
 }
 
 .blank-row {
     margin-bottom: 1vh;
 }
 
-th,
-td {
-    min(5vw, 4vh)
+@media (orientation: landscape) {
+    table {
+        max-width: 100%;
+    }
+}
+
+/* Table is very hard to show properly on mobile, so this one is still a bit jank :/ */
+@media (orientation: portrait) {
+    table {
+        font-size: 5vw;
+    }
+
+    table th,
+    table td {
+        flex-direction: column;
+        flex: none;
+        width: 100%;
+    }
+
+    .blank-row {
+        margin-bottom: 2vh;
+    }
 }

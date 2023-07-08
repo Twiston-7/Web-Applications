@@ -1,39 +1,40 @@
-$(document).ready(function() {
-    // Get the project list and populate the select element
-    $.ajax({
-        url: 'projects', // Replace with the API endpoint to fetch projects
-        type: 'GET',
-        success: function(response) {
-            // Assuming the response is an array of project objects
-            response.forEach(function(project) {
-                var option = '<option value="' + project.id + '">' + project.name + '</option>';
-                $('#project-select').append(option);
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Get the project list and populate the select element
+        let response = await fetch('projects');
+        if (response.ok) {
+            let data = await response.json();
+            data.forEach(function(project) {
+                let option = `<option value="${project.id}">${project.name}</option>`;
+                document.querySelector('#project-select').insertAdjacentHTML('beforeend', option);
             });
-        },
-        error: function(error) {
-            console.log('Error fetching projects:', error);
+        } else {
+            throw new Error('Error fetching projects');
         }
-    });
 
-    // Handle form submission
-    $('#project-form').submit(function(event) {
-        event.preventDefault(); // Prevent the default form submission
+        // Handle form submission
+        document.getElementById('project-form').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
 
-        let projectId = $('#project-select').val();
+            let projectId = document.querySelector('#project-select').value;
 
-        // Make the DELETE request
-        $.ajax({
-            url: 'projects/' + projectId, // Replace with the API endpoint to delete a project
-            type: 'DELETE',
-            success: function(response) {
-                // Handle success, such as displaying a success message
-                alert('Project deleted successfully');
-                window.location.href = 'http://localhost:3000/projects.html';
-            },
-            error: function(error) {
-                // Handle error, such as displaying an error message
+            try {
+                // Make the DELETE request
+                let deleteResponse = await fetch(`projects/${projectId}`, {
+                    method: 'DELETE'
+                });
+
+                if (deleteResponse.ok) {
+                    alert('Project deleted successfully');
+                    window.location.href = 'http://localhost:3000/projects.html';
+                } else {
+                    throw new Error('Error deleting project');
+                }
+            } catch (error) {
                 alert('Error deleting project: ' + error);
             }
         });
-    });
+    } catch (error) {
+        console.log('Error fetching projects:', error);
+    }
 });

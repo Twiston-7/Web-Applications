@@ -7,25 +7,38 @@
     <link rel="stylesheet" href="stylesheets/main.css"/>
     <link rel="stylesheet" href="stylesheets/projects.css"/>
     <link rel="stylesheet" href="stylesheets/button.css"/>
+    <link rel="stylesheet" href="stylesheets/navbar.css"/>
 </head>
 <body>
-<nav></nav>
-<script src="javascript/jquery-3.6.0.min.js"></script>
-<script>$(function() {$('nav').load('navbar.html');});</script>
+<nav>
+    <a href="index.html">
+        <img id="logo" alt="Logo" src="images/logo.png"/>
+    </a>
+    <ul>
+        <li>
+            <a href="about.html">About</a>
+        </li>
+        <li>
+            <a href="projects.html">Projects</a>
+        </li>
+        <li>
+            <a href="contact.html">Contact</a>
+        </li>
+    </ul>
+</nav>
 <script defer src="javascript/projects-loader.js"></script>
 
-<!--https://codepen.io/savalazic/pen/QKwERN-->
 <article>
     <h1>Here is a list of all my public projects</h1>
     <h3>These are all dummy projects for testing purposes! These projects are completely AI generated</h3>
     <br>
     <table>
         <thead>
-        <tr>
-            <th>Project name</th>
-            <th>Project language</th>
-            <th>Skills applied</th>
-        </tr>
+            <tr>
+                <th>Project name</th>
+                <th>Project language</th>
+                <th>Skills applied</th>
+            </tr>
         </thead>
         <tbody id="tbody-projects"></tbody>
     </table>

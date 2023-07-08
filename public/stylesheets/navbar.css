@@ -48,7 +48,21 @@ nav a:not(:hover) {
     width: auto;
 }
 
-#logout-button {
-    font-size: min(2vh, 3.5vw);
-    margin-left: 0vw;
+@media (orientation: portrait) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        margin-right: 1vh;
+    }
+
+    nav ul {
+        justify-content: center;
+    }
+
+    nav img {
+        justify-content: center;
+    }
 }

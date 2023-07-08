@@ -5,13 +5,26 @@
     <title>Home</title>
     <link rel="stylesheet" href="stylesheets/main.css"/>
     <link rel="stylesheet" href="stylesheets/typing-effect.css">
-    <script defer src="javascript/main.js"></script>
+    <link rel="stylesheet" href="stylesheets/navbar.css"/>
+    <script defer src="javascript/typing-effect.js"></script>
 </head>
 <body>
-<!--load navbar-->
-<nav></nav>
-<script src="javascript/jquery-3.6.0.min.js"></script>
-<script>$(function() {$('nav').load('navbar.html');});</script>
+<nav>
+    <a href="index.html">
+        <img id="logo" alt="Logo" src="images/logo.png"/>
+    </a>
+    <ul>
+        <li>
+            <a href="about.html">About</a>
+        </li>
+        <li>
+            <a href="projects.html">Projects</a>
+        </li>
+        <li>
+            <a href="contact.html">Contact</a>
+        </li>
+    </ul>
+</nav>
 
 <article>
     <div id="typingEffectBox">

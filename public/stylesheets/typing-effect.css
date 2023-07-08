@@ -3,6 +3,7 @@
     --text-color: #000000;
 }
 
+/* Animation for the cursor to blink */
 @keyframes blink {
     0% { opacity: 1; }
     49% { opacity: 1; }
@@ -31,10 +32,16 @@
     flex-direction: row;
     padding-top: 1vh;
     color: var(--text-color);
-    font-size: x-large;
+    font-size: min(5vw, 5vh);
     margin: 0;
 }
 
 .blinkingAnimation {
     animation: blink 1060ms infinite;
+}
+
+@media (orientation: portrait) {
+    #typingEffectBox {
+        padding: 2vh 2vw;
+    }
 }
