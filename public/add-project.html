@@ -30,30 +30,35 @@
     <h1>Add a Project</h1>
     <form id="project-form" action="#" method="POST">
         <label for="project-name">Project name:</label>
-        <input type="text" id="project-name" name="project-name" required>
-        <br>
-        <br>
+        <input type="text" id="project-name" name="project-name" placeholder="Project name" required>
+        <br> <br>
 
-        <label for="programmer-id">Author id:</label>
-        <input type="number" id="programmer-id" name="programmer-id" required>
-        <br>
-        <br>
+        <label for="programmer-id">Programmer id:</label>
+        <div id="programmer-container">
+            <input type="number" id="programmer-id" name="programmer-id" placeholder="Programmer id" required>
+            <button type="button" id="create-programmer-button" class="smallButton">Create new programmer</button>
+        </div>
+        <br> <br>
 
-        <label>Project language:</label>
-        <div id="projects-container">
+        <label for="article">Article: </label>
+        <div id="article-container">
+            <input type="text" id="article" name="article" placeholder="Paragraph" required>
+        </div>
+        <br> <br>
+
+        <label for="project-language">Project language:</label>
+        <div id="languages-container">
             <input type="text" id="project-language" name="project-language" required>
             <button type="button" class="add-language-button">+</button>
         </div>
-        <br>
-        <br>
+        <br> <br>
 
-        <label>Project skills:</label>
+        <label for="project-skills">Project skills:</label>
         <div id="skills-container">
-            <input type="text" class="project-skills" name="project-skills" required>
+            <input type="text" id="project-skills" name="project-skills" required>
             <button type="button" class="add-skill-button">+</button>
         </div>
-        <br>
-        <br>
+        <br> <br>
 
         <button type="submit" class="coloredButton">Add Project</button>
     </form>

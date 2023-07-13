@@ -16,16 +16,17 @@ function printProjects(projects) {
 
     for (const project of projects) {
         const tr = document.createElement('tr');
+
         const tdName = document.createElement('td');
         const tdLanguages = document.createElement('td');
         const tdSkills = document.createElement('td');
-        tdName.innerText = project.name;
+        const projectLink = document.createElement('a');
+        projectLink.href = `project-specification.html?id=${project.projectID}`;
+        projectLink.innerText = project.name;
 
-        // Add a space after each comma in the languages
-        tdLanguages.innerText = project.languages.split(',').map(project => project.trim()).join(', ');
-
-        // Add a space after each comma in the skills
-        tdSkills.innerText = project.skills.split(',').map(skill => skill.trim()).join(', ');
+        tdName.append(projectLink);
+        tdLanguages.innerText = project.languages;
+        tdSkills.innerText = project.skills;
 
         tr.append(tdName, tdLanguages, tdSkills);
         projectTableBody.append(tr);
@@ -38,6 +39,12 @@ function printProjects(projects) {
         projectTableBody.append(emptyTr);
 
         tr.classList.add('blank-row');
+
+        // Add event listener to redirect to project specification page
+        tr.addEventListener('click', () => {
+            const projectId = project.id; // Assuming the project ID is available in the project object
+            window.location.href = `project-specification.html?id=${projectId}`;
+        });
     }
 }
 

@@ -2,12 +2,18 @@ import statusCodes from "http-status-codes"; // Importing the 'http-status-codes
 import * as db from "../database/helpers/projects-database-helper.js"
 
 // Function to get all projects
-export const getAllProjects = async function (req, res) {
+export const getAllProjects = async (req, res) => {
     res.json(db.getProjects());
-    res
-        .status
-        .send(statusCodes.OK);
-};
+}
+
+export const getProgrammerFromProjectId = async (req, res) => {
+    res.json(db.getProgrammerFromProject(req.params.id));
+}
+
+export const getArticleFromProjectId = async (req, res) => {
+    res.json(db.getArticleFromProject(req.params.id));
+}
+
 
 // Function to add a project
 export const addProject = async function (req, res) {
@@ -50,16 +56,16 @@ export const addProject = async function (req, res) {
             return;
         }
 
-        db.addProject(project);
+        const returnValue = db.addProject(project);
 
         res
             .status(statusCodes.CREATED)
-            .send(`Project with name ${project.name} added.`);
+            .send(`Project with id ${returnValue} added.`);
     } catch (error) {
         console.error(error);
         res
             .status(statusCodes.INTERNAL_SERVER_ERROR)
-            .send("An error occurred while updating the project: " + error.message);
+            .send("An error occurred while creating the project: " + error.message);
     }
 };
 

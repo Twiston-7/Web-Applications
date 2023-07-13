@@ -36,10 +36,11 @@ export const addProgrammer = (programmer) => {
     `
 
     try {
-        db.prepare(addProgrammerQuery).run(
+        const result = db.prepare(addProgrammerQuery).run(
             programmer.name,
             programmer.age.toString()
         )
+        return result.lastInsertRowid; // Retrieve the ID of the newly inserted row
     } catch (Error) {
         console.error("Error adding programmer: " + Error.message);
         throw new Error("Error adding programmer: " + Error.message);

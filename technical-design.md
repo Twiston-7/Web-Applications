@@ -19,3 +19,10 @@ Made and added database schema to technical design <br>
 No longer using AJAX in front end <br>
 Fixed add-project page, project controller & router to work with new db schema <br>
 Added global error handling <br>
+Added router for new entities <br>
+Added SOC for database, so now controllers don't directly access the database but use a helper module <br>
+Add controller & database helper for the new entities <br>
+Fixed the add-project page, so it works without node serving the page <br>
+Added properly working PUT request for project, article and programmer <br>
+Made a new page with the Programmer and Article when a project is clicked <br>
+Made it so user can make a new programmer and article from the new project page. <br>

@@ -23,9 +23,40 @@ export const getProjects = () => {
     return returnValue;
 }
 
+export const getProgrammerFromProject = (id) => {
+    const db = new Database(databasePath);
+
+    const getProgrammerQuery = `
+        SELECT p.*
+        FROM programmer AS p
+        JOIN project AS pr ON p.programmerID = pr.programmer_id
+        WHERE pr.projectID = ?;
+    `
+
+    const returnValue = db.prepare(getProgrammerQuery).all(id);
+    db.close();
+    return returnValue;
+}
+
+export const getArticleFromProject = (id) => {
+    const db = new Database(databasePath);
+
+    const getArticleQuery = `
+        SELECT a.*
+        FROM article AS a
+        JOIN project AS pr ON a.project_id = pr.projectID
+        WHERE pr.projectID = ?;
+    `
+
+    const returnValue = db.prepare(getArticleQuery).all(id);
+    db.close();
+    return returnValue;
+}
+
 export const addProject = (project) => {
     // Creating a new instance of the database
     const db = new Database(databasePath);
+    let result;
 
     try {
         db.transaction(() => {
@@ -35,15 +66,15 @@ export const addProject = (project) => {
             VALUES (?, ?, ?, ?)
             `;
 
-            db.prepare(insertProjectQuery).run(
+            result = db.prepare(insertProjectQuery).run(
                 project.name,
                 project.languages.join(", "),
                 project.skills.join(", "),
                 project.programmerID
             );
         })();
-
         console.log("Project added successfully.");
+        return result.lastInsertRowid;
     } catch (error) {
         console.error("Error adding project: " + error.message);
         throw new Error("Error adding project: " + error.message);
@@ -103,10 +134,14 @@ export const updateProject = (projectId, updatedProject) => {
 
     // Execute the UPDATE query
     try {
-        db.prepare(updateQuery).exec(params);
+        const result = db.prepare(updateQuery).run(params);
+        if (result.changes === 0) {
+            throw new Error("No lines were changed. ")
+        }
         console.log(`Project with ID ${projectId} updated successfully.`);
     } catch (error) {
-        console.error('Error updating project:', error.message);
+        console.error("Error updating project:", error.message);
+        throw new Error(error.message);
     } finally {
         db.close();
     }

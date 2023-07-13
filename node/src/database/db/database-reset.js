@@ -2,8 +2,7 @@ import Database from "better-sqlite3";
 import path from "path";
 
 const __dirname = decodeURI(path.dirname(new URL(import.meta.url).pathname).replace(/^\//, ''));
-const databaseDirectory = path.join(__dirname, "db");
-const databasePath = path.normalize(path.join(databaseDirectory, "data.sqlite"));
+const databasePath = path.normalize(path.join(__dirname, "data.sqlite"));
 
 const db = new Database(databasePath);
 
@@ -59,7 +58,8 @@ db.exec(`
 console.log("Tables created successfully.");
 
 db.exec(`
-  INSERT INTO programmer (name, age) VALUES ('Harry', 12)
+  INSERT INTO programmer (name, age) 
+  VALUES ('Harry', 12)
 `);
 
 // Create projects
@@ -68,7 +68,17 @@ db.exec(`
 `);
 
 db.exec(`
+    INSERT INTO article (programmer_id, project_id, paragraph) 
+    VALUES (1, 1, 'This is project 1')
+`)
+
+db.exec(`
   INSERT INTO project (name, skills, languages, programmer_id) VALUES ('Project 2', 'Skill C, Skill D', 'Language Z, Language W', 1)
 `);
+
+db.exec(`
+    INSERT INTO article (programmer_id, project_id, paragraph) 
+    VALUES (1, 2, 'This is project 2')
+`)
 
 console.log("Projects created successfully.");

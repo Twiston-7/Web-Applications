@@ -44,10 +44,45 @@ document.addEventListener('DOMContentLoaded', function() {
         // Gather form data
         let formData = {
             name: document.getElementById('project-name').value,
-            programmerID: document.getElementById('programmer-id').value,
+            programmerID: null,
             languages: [],
             skills: []
         };
+
+        try {
+            formData.programmerID = document.getElementById('programmer-id').value
+        } catch (error) {} // Throws an error if the field isn't found, which happens when the user inputs a name and age instead of an id.
+
+        if (!formData.programmerID) {
+            try {
+                const name = document.getElementById('programmer-name').value;
+                const age = document.getElementById('programmer-age').value;
+
+                // Make the request to the server
+                let response = await fetch('http://localhost:3000/programmer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, age })
+                });
+
+                if (response.ok) {
+                    let responseText = await response.text();
+                    const match = responseText.match(/Programmer with id (\d+) added\./);
+                    if (match) {
+                        console.log("Match!");
+                        formData.programmerID = parseInt(match[1]);
+                        console.log(formData.programmerID);
+                    }
+                } else {
+                    throw new Error('An error occurred while adding the project: ' + await response.text());
+                }
+            } catch (error) {
+                alert(error.message);
+                console.error(error);
+            }
+        }
 
         // Push the value of the initial language input field
         let initialLanguage = document.querySelector('input[name="project-language"]').value;
@@ -77,9 +112,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        let newProjectID;
         try {
             // Make the request to the server
-            let response = await fetch('/projects', {
+            let response = await fetch('http://localhost:3000/projects', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -89,8 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (response.ok) {
                 let responseText = await response.text();
-                alert(responseText);
-                window.location.href = 'http://localhost:3000/projects.html';
+                const match = responseText.match(/Project with id (\d+) added\./);
+                if (match) {
+                    newProjectID = parseInt(match[1]);
+                }
             } else {
                 throw new Error('An error occurred while adding the project: ' + await response.text());
             }
@@ -98,5 +136,93 @@ document.addEventListener('DOMContentLoaded', function() {
             alert(error.message);
             console.error(error);
         }
+
+        // Create the article
+        const articleParagraph = document.getElementById("article").value;
+        try {
+            // Make the request to the server
+            let response = await fetch('http://localhost:3000/article', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ programmerID: formData.programmerID, paragraph: articleParagraph, projectID: newProjectID })
+            });
+
+            if (!response.ok) {
+                throw new Error('An error occurred while adding the article: ' + await response.text());
+            }
+        } catch (error) {
+            alert(error.message);
+            console.error(error);
+        }
     });
+
+    // Made into a function mostly, so I can collapse it that way I don't have to look at it xP
+    function programmerButtonManager() {
+        // Get the container element
+        const programmerContainer = document.getElementById('programmer-container');
+
+        // Create the new fields and button
+        const nameField = createInputElement('text', 'programmer-name', 'Name', true);
+        const ageField = createInputElement('number', 'programmer-age', 'Age', true);
+        const changeIdButton = createButton('button', 'change-id-button', 'smallButton', 'Change ID');
+
+        // Get the create programmer button
+        let createProgrammerButtonElement = document.getElementById('create-programmer-button');
+        createProgrammerButtonElement.addEventListener('click', createProgrammer);
+
+        // Add event listener to the change ID button
+        changeIdButton.addEventListener('click', changeId);
+
+        function createInputElement(type, id, placeholder, required) {
+            const element = document.createElement('input');
+            element.type = type;
+            element.id = id;
+            element.name = id;
+            element.placeholder = placeholder;
+            element.required = required;
+            return element;
+        }
+
+        function createButton(type, id, className, text) {
+            const button = document.createElement('button');
+            button.type = type;
+            button.id = id;
+            button.className = className;
+            button.innerText = text;
+            return button;
+        }
+
+        function createProgrammer() {
+            // Remove the number input field
+            const programmerIdInputBox = document.getElementById('programmer-id');
+            const createProgrammerButton = document.getElementById('create-programmer-button');
+            programmerContainer.removeChild(programmerIdInputBox);
+            programmerContainer.removeChild(createProgrammerButton);
+
+            // Append the new fields and button
+            programmerContainer.appendChild(nameField);
+            programmerContainer.appendChild(document.createElement('br')); // New line
+            programmerContainer.appendChild(ageField);
+            programmerContainer.appendChild(changeIdButton);
+        }
+
+        function changeId() {
+            // Remove the newly created fields
+            while (programmerContainer.firstChild) {
+                programmerContainer.removeChild(programmerContainer.firstChild);
+            }
+
+            const numberInput = createInputElement('number', 'programmer-id', 'Programmer id', true);
+            const createProgrammerButton = createButton('button', 'create-programmer-button', 'smallButton', 'Create new programmer');
+
+            // Append the initial ID box
+            programmerContainer.appendChild(numberInput);
+            programmerContainer.appendChild(createProgrammerButton);
+            createProgrammerButtonElement = createProgrammerButton;
+            createProgrammerButtonElement.addEventListener('click', createProgrammer);
+        }
+    }
+    programmerButtonManager();
 });

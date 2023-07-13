@@ -27,15 +27,13 @@ export const getArticle = (id) => {
 }
 
 export const addArticle = (article) => {
-    // https://pastebin.com/P4ux2uXd
-
     // Creating a new instance of the database
     const db = new Database(databasePath);
 
     const addArticleQuery = `
-        INSERT INTO article (programmerID, projectID, paragraph)
+        INSERT INTO article (programmer_id, project_id, paragraph)
         VALUES (
-            (SELECT programmerID 
+            (SELECT programmer_id 
             FROM project 
             WHERE projectID = ?),
             ?,
@@ -46,10 +44,10 @@ export const addArticle = (article) => {
     const pStmt = db.prepare(addArticleQuery);
 
     try {
-        pStmt.exec(article.projectID, article.projectID, article.paragraph);
-    } catch (Error) {
-        console.error("Error adding article: " + Error.message);
-        throw new Error("Error adding article: " + Error.message);
+        pStmt.run(article.projectID, article.projectID, article.paragraph);
+    } catch (error) {
+        console.error("Error adding article: " + error.message);
+        throw new Error("Error adding article: " + error.message);
     } finally {
         db.close();
     }

@@ -4,9 +4,6 @@ import * as db from "../database/helpers/article-database-helper.js"
 export const getArticle = async (req, res) => {
     const id = req.params.id;
     res.json(db.getArticle(id));
-    res
-        .status
-        .send(statusCodes.OK);
 }
 
 export const addArticle = async (req, res) => {
@@ -22,13 +19,15 @@ export const addArticle = async (req, res) => {
     if (!article.projectID) {
         res
             .status(statusCodes.BAD_REQUEST)
-            .send("No project ID. Please provide a valid project ID. ")
+            .send("No project ID. Please provide a valid project ID. ");
+        return;
     }
 
     if (!article.paragraph) {
         res
             .status(statusCodes.BAD_REQUEST)
-            .send("No paragraph (text). Please provide a valid paragraph. ")
+            .send("No paragraph (text). Please provide a valid paragraph. ");
+        return;
     }
 
     db.addArticle(article);

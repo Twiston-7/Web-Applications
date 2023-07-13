@@ -26,6 +26,13 @@
     text-decoration: none;
 }
 
+.smallButton {
+    background-color: #8686e0;
+    color: #211441;
+    border: none;
+    cursor: pointer;
+}
+
 @media (orientation: portrait) {
     #button-wrapper {
         flex-direction: column;

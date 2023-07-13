@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Project</title>
+
+    <link rel="stylesheet" href="stylesheets/navbar.css"/>
+    <link rel="stylesheet" href="stylesheets/button.css"/>
+    <link rel="stylesheet" href="stylesheets/project-specification.css">
+    <script defer src="javascript/project-specification.js"></script>
+    <script defer src="javascript/create-programmer-or-use-id.js"></script>
 </head>
 <body>
-$END$
+<nav>
+  <a href="index.html">
+    <img id="logo" alt="Logo" src="images/logo.png"/>
+  </a>
+  <ul>
+    <li>
+      <a href="about.html">About</a>
+    </li>
+    <li>
+      <a href="projects.html">Projects</a>
+    </li>
+    <li>
+      <a href="contact.html">Contact</a>
+    </li>
+  </ul>
+</nav>
+
+<menu>
+    <button type="submit" id="modify-project-button" class="coloredButton">Modify project</button>
+    <button type="submit" id="delete-project-button" class="coloredButton">Delete project</button>
+</menu>
+
+<aside> <!--Info about the programmer-->
+    <h3 id="programmer-name">Programmer name: </h3>
+    <h3 id="programmer-age">Programmer age: </h3>
+</aside>
+
+<article> <!--The paragraph of the article-->
+    <h1>Article</h1>
+    <p id="project-article">
+        Article could not load.
+    </p>
+</article>
+
 </body>
 </html>
