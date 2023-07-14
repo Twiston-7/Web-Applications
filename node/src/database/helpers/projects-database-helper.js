@@ -53,6 +53,21 @@ export const getArticleFromProject = (id) => {
     return returnValue;
 }
 
+export const getProject = (id) => {
+    // Creating a new instance of the database
+    const db = new Database(databasePath);
+
+    const getAllProjectsQuery = `
+        SELECT *
+        FROM project
+        WHERE projectID = ?
+        `;
+
+    const returnValue = db.prepare(getAllProjectsQuery).all(id);
+    db.close();
+    return returnValue;
+}
+
 export const addProject = (project) => {
     // Creating a new instance of the database
     const db = new Database(databasePath);

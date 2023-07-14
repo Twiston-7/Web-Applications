@@ -6,6 +6,10 @@ export const getAllProjects = async (req, res) => {
     res.json(db.getProjects());
 }
 
+export const getProjectById = async (req, res) => {
+    res.json(db.getProject(req.params.id));
+}
+
 export const getProgrammerFromProjectId = async (req, res) => {
     res.json(db.getProgrammerFromProject(req.params.id));
 }
