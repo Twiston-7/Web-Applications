@@ -1,6 +1,6 @@
-import Database from "better-sqlite3"; // Importing the 'better-sqlite3' library
-import { fileURLToPath } from "url"; // Importing the 'url' module
-import path from "path"; // Importing the 'path' module
+import Database from "better-sqlite3"; // Importing the "better-sqlite3" library
+import { fileURLToPath } from "url"; // Importing the "url" module
+import path from "path"; // Importing the "path" module
 
 // Getting the current file name and directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -60,7 +60,7 @@ export const addProject = (project) => {
 
     try {
         db.transaction(() => {
-            // Insert the project into the 'projects' table
+            // Insert the project into the "projects" table
             const insertProjectQuery = `
             INSERT INTO project (name, languages, skills, programmer_id)
             VALUES (?, ?, ?, ?)
@@ -102,26 +102,26 @@ export const updateProject = (projectId, updatedProject) => {
     const db = new Database(databasePath);
 
     // Construct the UPDATE query dynamically based on the fields present in the updated project
-    let updateQuery = 'UPDATE project SET ';
+    let updateQuery = "UPDATE project SET ";
     let params = [];
 
     if (updatedProject.programmerID) {
-        updateQuery += 'programmerID = ?, ';
+        updateQuery += "programmerID = ?, ";
         params.push(updatedProject.programmerID);
     }
 
     if (updatedProject.name) {
-        updateQuery += 'name = ?, ';
+        updateQuery += "name = ?, ";
         params.push(updatedProject.name);
     }
 
     if (updatedProject.skills) {
-        updateQuery += 'skills = ?, ';
+        updateQuery += "skills = ?, ";
         params.push(updatedProject.skills.join(", "));
     }
 
     if (updatedProject.languages) {
-        updateQuery += 'languages = ?, ';
+        updateQuery += "languages = ?, ";
         params.push(updatedProject.languages.join(", "));
     }
 
@@ -129,7 +129,7 @@ export const updateProject = (projectId, updatedProject) => {
     updateQuery = updateQuery.slice(0, -2);
 
     // Append the WHERE condition to the query
-    updateQuery += ' WHERE projectID = ?';
+    updateQuery += " WHERE projectID = ?";
     params.push(projectId);
 
     // Execute the UPDATE query

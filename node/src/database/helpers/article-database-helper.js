@@ -1,6 +1,6 @@
-import Database from "better-sqlite3"; // Importing the 'better-sqlite3' library
-import { fileURLToPath } from "url"; // Importing the 'url' module
-import path from "path"; // Importing the 'path' module
+import Database from "better-sqlite3"; // Importing the "better-sqlite3" library
+import { fileURLToPath } from "url"; // Importing the "url" module
+import path from "path"; // Importing the "path" module
 
 // Getting the current file name and directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -41,13 +41,15 @@ export const addArticle = (article) => {
         )
     `;
 
-    const pStmt = db.prepare(addArticleQuery);
+    let result;
 
     try {
-        pStmt.run(article.projectID, article.projectID, article.paragraph);
+        result = db.prepare(addArticleQuery).run(article.projectID, article.projectID, article.paragraph);
+        return result.lastInsertRowid;
     } catch (error) {
         console.error("Error adding article: " + error.message);
         throw new Error("Error adding article: " + error.message);
+
     } finally {
         db.close();
     }
@@ -72,16 +74,16 @@ export const updateArticle = (articleID, updatedArticle) => {
     const db = new Database(databasePath);
 
     // Construct the UPDATE query dynamically based on the fields present in the updated project
-    let updateQuery = 'UPDATE article SET ';
+    let updateQuery = "UPDATE article SET ";
     let params = [];
 
     if (updatedArticle.programmerID) {
-        updateQuery += 'programmerID = ?, ';
+        updateQuery += "programmerID = ?, ";
         params.push(updatedArticle.programmerID);
     }
 
     if (updatedArticle.paragraph) {
-        updateQuery += 'paragraph = ?, ';
+        updateQuery += "paragraph = ?, ";
         params.push(updatedArticle.paragraph);
     }
 
@@ -89,7 +91,7 @@ export const updateArticle = (articleID, updatedArticle) => {
     updateQuery = updateQuery.slice(0, -2);
 
     // Append the WHERE condition to the query
-    updateQuery += ' WHERE articleID = ?';
+    updateQuery += " WHERE articleID = ?";
     params.push(articleID);
 
     // Execute the UPDATE query
@@ -97,7 +99,7 @@ export const updateArticle = (articleID, updatedArticle) => {
         db.prepare(updateQuery).exec(params);
         console.log(`Article with ID ${articleID} updated successfully.`);
     } catch (error) {
-        console.error('Error updating article:', error.message);
+        console.error("Error updating article:", error.message);
     } finally {
         db.close();s
     }

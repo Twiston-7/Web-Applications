@@ -8,10 +8,10 @@ const drawText = async function(wordsToType) {
     while (true) {
         container.innerText = "​";
 
-        for (let x in wordsToType) {
+        for (const x in wordsToType) {
             blink = false;
-            for (let y in wordsToType[x]) {
-                let randomOffset = Math.floor(Math.random() * 120) + 1;
+            for (const y in wordsToType[x]) {
+                const randomOffset = Math.floor(Math.random() * 120) + 1;
                 container.innerText += (wordsToType[x][y] + "​");
                 await sleep(100 + randomOffset);
             }
@@ -20,9 +20,9 @@ const drawText = async function(wordsToType) {
             await sleep(2000);
             blink = false;
 
-            for (let x in container.innerText) {
+            for (const x in container.innerText) {
                 if (container.innerText.length > 1) {
-                    let randomOffset = Math.floor(Math.random() * 50) + 1;
+                    const randomOffset = Math.floor(Math.random() * 50) + 1;
                     container.innerText = container.innerText.slice(0, -1);
                     await sleep(50 + randomOffset);
                 }
@@ -33,7 +33,7 @@ const drawText = async function(wordsToType) {
 }
 
 const cursor = async function() {
-    let container = document.getElementById("cursor");
+    const container = document.getElementById("cursor");
     container.innerText = "|";
     while (true) {
         if (blink) {

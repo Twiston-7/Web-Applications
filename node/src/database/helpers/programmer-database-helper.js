@@ -1,6 +1,6 @@
-import Database from "better-sqlite3"; // Importing the 'better-sqlite3' library
-import { fileURLToPath } from "url"; // Importing the 'url' module
-import path from "path"; // Importing the 'path' module
+import Database from "better-sqlite3"; // Importing the "better-sqlite3" library
+import { fileURLToPath } from "url"; // Importing the "url" module
+import path from "path"; // Importing the "path" module
 
 // Getting the current file name and directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -67,16 +67,16 @@ export const updateProgrammer = (programmerID, updatedProgrammer) => {
     const db = new Database(databasePath);
 
     // Construct the UPDATE query dynamically based on the fields present in the updated project
-    let updateQuery = 'UPDATE article SET ';
+    let updateQuery = "UPDATE article SET ";
     let params = [];
 
     if (updatedProgrammer.name) {
-        updateQuery += 'name = ?, ';
+        updateQuery += "name = ?, ";
         params.push(updatedProgrammer.name);
     }
 
     if (updatedProgrammer.age) {
-        updateQuery += 'age = ?, ';
+        updateQuery += "age = ?, ";
         params.push(updatedProgrammer.age);
     }
 
@@ -84,7 +84,7 @@ export const updateProgrammer = (programmerID, updatedProgrammer) => {
     updateQuery = updateQuery.slice(0, -2);
 
     // Append the WHERE condition to the query
-    updateQuery += ' WHERE programmerID = ?';
+    updateQuery += " WHERE programmerID = ?";
     params.push(programmerID);
 
     // Execute the UPDATE query
@@ -92,7 +92,7 @@ export const updateProgrammer = (programmerID, updatedProgrammer) => {
         db.prepare(updateQuery).exec(params);
         console.log(`Programmer with ID ${programmerID} updated successfully.`);
     } catch (error) {
-        console.error('Error updating programmer:', error.message);
+        console.error("Error updating programmer:", error.message);
     } finally {
         db.close();
     }

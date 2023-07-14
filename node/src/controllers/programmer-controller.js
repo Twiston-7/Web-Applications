@@ -1,4 +1,4 @@
-import statusCodes, { StatusCodes } from "http-status-codes"; // Importing the 'http-status-codes' library
+import statusCodes, { StatusCodes } from "http-status-codes"; // Importing the "http-status-codes" library
 import * as db from "../database/helpers/programmer-database-helper.js"
 
 export const getProgrammer = async (req, res) => {
@@ -44,10 +44,44 @@ export const addProgrammer = (req, res) => {
     }
 }
 
-export const deleteProgrammer = () => {
+export const deleteProgrammer = (req, res) => {
+    const programmerId = req.params.id;
 
+    const result = db.deleteProgrammer(programmerId);
+
+    if (result.changes === 0) {
+        res
+            .status(statusCodes.NOT_FOUND)
+            .send(`Programmer with ID ${programmerId} not found.`);
+    } else {
+        res
+            .status(statusCodes.OK)
+            .send(`Programmer with ID ${programmerId} deleted.`);
+    }
 }
 
-export const putProgrammer = () => {
+export const updateProgrammer = (req, res) => {
+    const programmerId = req.params.id;
+    const updatedProgrammer = req.body;
 
+    if (!updatedProgrammer || Object.keys(updatedProgrammer).length === 0) {
+        // Return an error response if the request body is empty
+        res
+            .status(statusCodes.BAD_REQUEST)
+            .send("Empty request body. Please provide project details.");
+        return;
+    }
+
+    try {
+        db.updateProgrammer(programmerId, updatedProgrammer);
+
+        res
+            .status(statusCodes.OK)
+            .send(`Project with ID ${programmerId} updated.`);
+    } catch (error) {
+        console.error(error);
+        res
+            .status(statusCodes.INTERNAL_SERVER_ERROR)
+            .send("An error occurred while updating the project: " + error.message);
+    }
 }

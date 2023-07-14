@@ -26,3 +26,6 @@ Fixed the add-project page, so it works without node serving the page <br>
 Added properly working PUT request for project, article and programmer <br>
 Made a new page with the Programmer and Article when a project is clicked <br>
 Made it so user can make a new programmer and article from the new project page. <br>
+Cleaned up code, made all "let" variables that can be "const" variables into "const" variables <br>
+Made ' into " wherever possible for consistency. <br>
+Added functionality to delete a project from the project specific page. <br>

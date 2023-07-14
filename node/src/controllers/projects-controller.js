@@ -1,4 +1,4 @@
-import statusCodes from "http-status-codes"; // Importing the 'http-status-codes' library
+import statusCodes from "http-status-codes"; // Importing the "http-status-codes" library
 import * as db from "../database/helpers/projects-database-helper.js"
 
 // Function to get all projects

@@ -38,7 +38,9 @@ db.exec(`
     skills TEXT,
     languages TEXT,
     
-    FOREIGN KEY (programmer_id) REFERENCES Programmer(programmerID)
+    FOREIGN KEY (programmer_id) REFERENCES programmer(programmerID)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
   )
 `);
 
@@ -50,8 +52,12 @@ db.exec(`
     project_id INTEGER UNIQUE,
     paragraph TEXT,
     
-    FOREIGN KEY (programmer_id) REFERENCES Programmer(programmerID),
-    FOREIGN KEY (project_id) REFERENCES Project(projectID)
+    FOREIGN KEY (programmer_id) REFERENCES programmer(programmerID)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES project(projectID)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
   )
 `);
 
@@ -64,21 +70,23 @@ db.exec(`
 
 // Create projects
 db.exec(`
-  INSERT INTO project (name, skills, languages, programmer_id) VALUES ('Project 1', 'Skill A, Skill B', 'Language X, Language Y', 1)
+  INSERT INTO project (name, skills, languages, programmer_id) 
+  VALUES ('Project 1', 'Skill A, Skill B', 'Language X, Language Y', 1)
 `);
 
 db.exec(`
     INSERT INTO article (programmer_id, project_id, paragraph) 
     VALUES (1, 1, 'This is project 1')
-`)
+`);
 
 db.exec(`
-  INSERT INTO project (name, skills, languages, programmer_id) VALUES ('Project 2', 'Skill C, Skill D', 'Language Z, Language W', 1)
+  INSERT INTO project (name, skills, languages, programmer_id) 
+  VALUES ('Project 2', 'Skill C, Skill D', 'Language Z, Language W', 1)
 `);
 
 db.exec(`
     INSERT INTO article (programmer_id, project_id, paragraph) 
     VALUES (1, 2, 'This is project 2')
-`)
+`);
 
 console.log("Projects created successfully.");
