@@ -28,7 +28,7 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 // Serve static files from the "public" directory
-app.use(express.static(join(__dirname, "..", "..", "public")));
+// app.use(express.static(join(__dirname, "..", "..", "public")));
 
 // Parse JSON request bodies
 app.use(express.json());
@@ -46,9 +46,9 @@ app.use("/article", articleRouter);
 app.use("/programmer", programmerRouter);
 
 // Set up a route to serve the index.html file
-app.get("/", (req, res) => {
-    res.sendFile(join(__dirname, "..", "..", "public", "index.html"));
-});
+// app.get("/", (req, res) => {
+//     res.sendFile(join(__dirname, "..", "..", "public", "index.html"));
+// });
 
 // Start the server
 app.listen(port, () => {

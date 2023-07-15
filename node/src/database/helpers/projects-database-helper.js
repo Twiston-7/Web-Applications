@@ -117,7 +117,7 @@ export const updateProject = (projectId, updatedProject) => {
     const db = new Database(databasePath);
 
     // Construct the UPDATE query dynamically based on the fields present in the updated project
-    let updateQuery = "UPDATE project SET ";
+    let updateQuery = "UPDATE project SET  ";
     let params = [];
 
     if (updatedProject.programmerID) {

@@ -1,15 +1,17 @@
 // Function to load projects from the server
 const loadProjects = async function() {
+    let data;
     try {
         const response = await fetch("http://localhost:3000/projects", {
                 signal: AbortSignal.timeout(10000),
                 method: "GET"
             }); // Make a GET request to retrieve projects
-        const data = await response.json(); // Parse the response data as JSON
-        printProjects(data); // Call the printProjects function to display the projects
+        data = await response.json(); // Parse the response data as JSON
     } catch (error) {
         console.error(error); // Log any errors that occur
     }
+
+    printProjects(data); // Call the printProjects function to display the projects
 }
 
 // Function to print projects in the table

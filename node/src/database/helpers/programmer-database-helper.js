@@ -67,7 +67,7 @@ export const updateProgrammer = (programmerID, updatedProgrammer) => {
     const db = new Database(databasePath);
 
     // Construct the UPDATE query dynamically based on the fields present in the updated project
-    let updateQuery = "UPDATE article SET ";
+    let updateQuery = "UPDATE programmer SET ";
     let params = [];
 
     if (updatedProgrammer.name) {
@@ -89,7 +89,7 @@ export const updateProgrammer = (programmerID, updatedProgrammer) => {
 
     // Execute the UPDATE query
     try {
-        db.prepare(updateQuery).exec(params);
+        db.prepare(updateQuery).run(params);
         console.log(`Programmer with ID ${programmerID} updated successfully.`);
     } catch (error) {
         console.error("Error updating programmer:", error.message);

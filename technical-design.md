@@ -29,3 +29,5 @@ Made it so user can make a new programmer and article from the new project page.
 Cleaned up code, made all "let" variables that can be "const" variables into "const" variables <br>
 Made ' into " wherever possible for consistency. <br>
 Added functionality to delete a project from the project specific page. <br>
+Allow the user to modify a project from the specification page <br>
+Tried to make the modify screen look pretty, but failed <br>

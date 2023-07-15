@@ -96,11 +96,11 @@ export const updateArticle = (articleID, updatedArticle) => {
 
     // Execute the UPDATE query
     try {
-        db.prepare(updateQuery).exec(params);
+        db.prepare(updateQuery).run(params);
         console.log(`Article with ID ${articleID} updated successfully.`);
     } catch (error) {
         console.error("Error updating article:", error.message);
     } finally {
-        db.close();s
+        db.close();
     }
 }
